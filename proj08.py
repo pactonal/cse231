@@ -18,10 +18,19 @@ REGIONS = {'MENA': 'Middle East and North Africa', 'EUR': 'Europe',
 
 def open_file():
     '''
-        Place Docstring here!
+    Opens user inputted file
+    Returns: File pointer
     '''
-
-    pass
+    opened = 0
+    while opened != 1:
+        try:
+            filename = input("Enter a file name: ")
+            f = open(filename, "r", encoding="windows-1252")
+            opened = 1
+        except IOError:
+            print("Error. Please try again.")
+            opened = 0
+    return f
 
 
 def create_dictionary(fp):
