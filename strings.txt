@@ -1,0 +1,5 @@
+"Enter a file name: "
+"Error. Please try again."
+"Maximum Population Change by Continent\n"
+"{:<26s}{:>9s}{:>10s}".format("Continent","Years","Delta")
+"\nMaximum of all continents:"
