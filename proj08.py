@@ -37,15 +37,33 @@ def create_dictionary(fp):
     '''
         Place Docstring here!
     '''
+    datadict = {}
 
-    pass
+    for line in fp:
+        line_list = line.strip().split(',')
+
+        country = line_list[1]
+        region = line_list[2]
+        age_group = line_list[3]
+        gender = line_list[4]
+        geographic_area = line_list[5]
+        diabetes = int(float(line_list[6]) * 1000)
+        population = int(float(line_list[7]) * 1000)
+
+        tup = (gender, geographic_area, diabetes, population)
+
+        datadict[region] = {}
+        datadict[region][country] = {}
+        datadict[region][country][age_group] - {}
+        datadict[region][country][age_group].append(tup)
+
+    return datadict
 
 
 def get_country_total(data):
     '''
         Place Docstring here!
     '''
-
     pass
 
 
@@ -53,7 +71,6 @@ def display_table(data, region):
     '''
         Place Docstring here!
     '''
-
     pass
 
 
@@ -61,7 +78,6 @@ def prepare_plot(data):
     '''
         Place Docstring here!
     '''
-
     pass
 
 
@@ -149,7 +165,12 @@ def main():
     "Error with the region key! Try another region"
     "Incorrect Input! Try Again!"
 
-    pass
+    with open_file() as fp:
+        data = create_dictionary(fp)
+        for region in data:
+            for country in region:
+                for age_group in country:
+                    total = get_country_total(age_group)
 
 
 if __name__ == "__main__":
