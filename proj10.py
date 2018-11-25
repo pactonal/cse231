@@ -492,13 +492,11 @@ def game_play_ai():
     # loop until the game is finished
     while not is_game_finished(board):
         try:
-            # Count the pieces and assign into piece_count
-            piece_count = count_pieces(board)
-
-            print("Current board:")
-            board.display(piece_count)
-
             if turn == opponent_color:
+                piece_count = count_pieces(board)
+                print("Current board:")
+                board.display(piece_count)
+
                 move = ai.get_next_move(board, turn)
                 if type(move) is tuple:
                     apply_move(board, move)
@@ -506,11 +504,12 @@ def game_play_ai():
                     apply_capture(board, move)
                 print("\t{:s} played {:s}.".format(turn, str(move)))
                 piece_count = count_pieces(board)
+                turn = my_color
+
+            elif turn == my_color:
+                piece_count = count_pieces(board)
                 print("Current board:")
                 board.display(piece_count)
-                turn = my_color if turn == opponent_color else my_color
-            else:
-
                 # Get the command from user using input
                 command = input(prompt.format(turn)).strip().lower()
 
@@ -564,8 +563,7 @@ def game_play_ai():
                     else:
                         raise RuntimeError(cmd_error + tools.usage)
                     print("\t{:s} played {:s}.".format(turn, str(action)))
-                    turn = (opponent_color if turn == my_color else
-                            opponent_color)
+                    turn = opponent_color
         except Exception as err:
             print("Error:", err)
 
